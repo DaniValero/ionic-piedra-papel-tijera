@@ -1,27 +1,22 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import '@ionic/react/css/core.css';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react';
+import React, {useState} from 'react';
+import MatchController from '../controller/MatchController';
+import '@ionic/react/css/core.css'
 
 function Home() {
+
   return (
   <>
- <IonPage>
+    <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Prueba técnica</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        The world is your oyster.
-        <p>
-          If you get lost, the{' '}
-          <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">
-            docs
-          </a>{' '}
-          will be your guide.
-        </p>
+          <MatchController />
       </IonContent>
     </IonPage>
-  <h1>Adios</h1>
   </>
   );
 }
