@@ -2,8 +2,8 @@
 
 const handleResult = (player, computer, winner) => {
 
-    console.log(player)
-    console.log(computer)
+    console.log("winner is" + winner)
+
 
 
 }

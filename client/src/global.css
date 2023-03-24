@@ -12,7 +12,18 @@ code {
     monospace;
 }
 
+.game-wrapper {
+  margin: 2px auto;
 
-h1 {
-  color: red;
+}
+
+.player {
+  justify-content: center;
+  max-width: 30vw;
+  margin: 2px auto;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
 }
