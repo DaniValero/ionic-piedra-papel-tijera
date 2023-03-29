@@ -12,13 +12,29 @@ code {
     monospace;
 }
 
+@font-face {
+	font-family: "versus-font";
+	src: local("Vs-font"),
+  url("./assets/Vs-font.ttf") format("truetype");
+}
+
+
 .game-wrapper {
-  margin: 2px auto;
+  margin: 10vh auto;
 
 }
 
+.card-img {
+  max-height: 30vh;
+  min-width: 15vw;
+  width: fit-content;
+}
+
 .player {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
   max-width: 30vw;
   margin: 2px auto;
 }
@@ -26,4 +42,18 @@ code {
 .button-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.card-title {
+  justify-content: center;
+}
+
+.versus-text {
+  font-family: "versus-font";
+  font-size: 90px;
+  margin: auto;
+}
+
+.history-wrapper {
+  margin: 10vh auto;
 }

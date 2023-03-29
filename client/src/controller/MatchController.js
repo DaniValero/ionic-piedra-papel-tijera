@@ -1,7 +1,11 @@
 import { IonButton, IonCard, IonToast } from "@ionic/react"
 import React, {useState, useEffect} from "react"
-import handleResult from "../model/MatchModel"
-import axios from "axios"
+import saveMatchData from "../model/SaveMatch"
+import playerimg from "../assets/Player.jpg"
+import computerimg from "../assets/computer.jpg"
+import rock from "../assets/Rock.png"
+import paper from "../assets/Paper.png"
+import scissors from "../assets/Scissors.jpg"
 import "../global.css"
 
 
@@ -14,20 +18,21 @@ const MatchController = () => {
     const [reset, setReset] = useState(false)
     const [winner, setWinner] = useState()
     const [showToast, setShowToast] = useState(false);
-
     
     // Gives each player a turn and renames it to identify "rock", "paper" or "scissors"
 
     const handleGame = async () => {
+
         setTimeout(() => {
             playerTurn === 0 && setPlayer("Rock")
             playerTurn === 1 && setPlayer("Paper")
             playerTurn === 2 && setPlayer("Scissors")
         }, 2000); 
         
+
         setTimeout(() => {
             computerTurn === 0 && setComputer("Rock")
-            computerTurn === 1 && setComputer("Paper")
+            computerTurn === 1 && setComputer("Paper") 
             computerTurn === 2 && setComputer("Scissors")
         }, 4000);
 
@@ -40,7 +45,7 @@ const MatchController = () => {
         setReset(false)
     }, [reset])
 
-    // Checks the turns and declares a winner 
+    // Checks the turns , declares a winner and saves the match
 
     const handleWinner = async () => {
 
@@ -52,27 +57,18 @@ const MatchController = () => {
             setWinner("Computer")
         }
 
-        await axios.post("http://localhost:5500/client/src/utils/api.php",
-        {
-            player: player,
-            computer: computer,
-            result: winner
-        })
-        .then((data) => console.log("Succes:", data))
-        .catch((error) => {
-            console.error('Error:', error);
-        })
-
+        setShowToast(true)
     }
 
     // Clears the state values when the button is pressed 
 
     const handleReset = () => {
-        handleResult(player, computer, winner)
+        saveMatchData(player, computer, winner)
         setComputer("")
         setPlayer("")
         setWinner("")
         setReset(true)
+        handleGame()
     }
 
 
@@ -89,25 +85,32 @@ const MatchController = () => {
         <>
 
             <ion-row class="game-wrapper">
-                <ion-col size="6">
+                <ion-col size="5">
                     <IonCard className="player">
                         <ion-card-header>
-                        <ion-card-title>Player</ion-card-title>
+                        <ion-card-title className="text-center">Player</ion-card-title>
                         <ion-card-subtitle>{player}</ion-card-subtitle>
                         </ion-card-header>
                         <ion-card-content>
-                            Aquí va la foto
+                            {player === "" && <img src={playerimg} alt='Player img' className="card-img"></img>}
+                            {player === "Rock" && <img src={rock} alt='Player img' className="card-img"></img>}
+                            {player === "Paper" && <img src={paper} alt='Player img' className="card-img"></img>}
+                            {player === "Scissors" && <img src={scissors} alt='Player img' className="card-img"></img>}
                         </ion-card-content>
                     </IonCard>
                 </ion-col>
-                <ion-col size="6">
-                <IonCard className="player">
+                <h1 className="versus-text">VS</h1>
+                <ion-col size="5">
+                    <IonCard className="player">
                         <ion-card-header>
                         <ion-card-title>Computer</ion-card-title>
                         <ion-card-subtitle>{computer}</ion-card-subtitle>
                         </ion-card-header>
                         <ion-card-content>
-                            Aquí va la foto
+                            {computer === "" && <img src={computerimg} alt='Player img' className="card-img"></img>}
+                            {computer === "Rock" && <img src={rock} alt='Player img' className="card-img"></img>}
+                            {computer === "Paper" && <img src={paper} alt='Player img' className="card-img"></img>}
+                            {computer === "Scissors" && <img src={scissors} alt='Player img' className="card-img"></img>}
                         </ion-card-content>
                     </IonCard>
                 </ion-col>
@@ -116,9 +119,8 @@ const MatchController = () => {
             <div className="button-wrapper">
                 {player === "" && <IonButton className="main-button" onClick={() => handleGame()}>Play</IonButton> }
 
-                {player !== "" && winner !== ""  && player !== computer ? <IonToast>{`Winner is ${winner}`}</IonToast> : winner === "Draw" && <IonToast>{`Looks like we have a ${winner}`}</IonToast>}
-
-                {player && computer !== "" && <IonButton className="main-button" onClick={() => handleReset()}>Reset</IonButton>}
+                {player !== "" && winner !== ""  && player !== computer ? <IonToast isOpen={showToast} onDidDismiss={() => setShowToast(false)} message={`${winner} wins!`} duration={3000} />  : winner === "Draw" &&  <IonToast isOpen={showToast} onDidDismiss={() => setShowToast(false)} message="Looks like we have a draw!" duration={3000} />}
+                {player && computer !== "" && <IonButton className="main-button" onClick={() => handleReset()}>Play Again</IonButton>}
             </div>
 
        
