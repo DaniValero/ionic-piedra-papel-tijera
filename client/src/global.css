@@ -12,35 +12,57 @@ code {
     monospace;
 }
 
+@media screen and (min-width: 300px) and (max-width: 600px){
+ 
+  .game-wrapper {
+    margin: 10vh auto;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .player-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 200px;
+    margin: 2px auto;
+  }
+
+}
+
 @font-face {
 	font-family: "versus-font";
 	src: local("Vs-font"),
   url("./assets/Vs-font.ttf") format("truetype");
 }
 
+/* GAME VIEW  */
 
 .game-wrapper {
   margin: 10vh auto;
-
+  display: flex;
 }
 
 .card-img {
-  max-height: 30vh;
-  min-width: 15vw;
-  width: fit-content;
+  height: 30vh;
+  width: 25vw;
 }
 
-.player {
+.player-card {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  max-width: 30vw;
+  width: 30vw;
   margin: 2px auto;
 }
 
 .button-wrapper {
   display: flex;
+  margin: 0px auto;
+  width: 20vw;
   justify-content: center;
 }
 
@@ -51,9 +73,15 @@ code {
 .versus-text {
   font-family: "versus-font";
   font-size: 90px;
-  margin: auto;
+  margin: 2px auto;
 }
+
+/* HISTORY VIEW  */
 
 .history-wrapper {
   margin: 10vh auto;
+}
+
+.title-reset {
+  display: flex;
 }

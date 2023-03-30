@@ -1,4 +1,4 @@
-import { IonHeader, IonTitle, IonToolbar, IonNavLink, IonButtons, IonButton } from '@ionic/react';
+import { IonHeader, IonTitle, IonToolbar, IonButtons, IonButton } from '@ionic/react';
 
 
 const Navbar = () => {

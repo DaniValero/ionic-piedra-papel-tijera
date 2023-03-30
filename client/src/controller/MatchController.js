@@ -17,11 +17,14 @@ const MatchController = () => {
     const [computer, setComputer] = useState("")
     const [reset, setReset] = useState(false)
     const [winner, setWinner] = useState()
+    const [isButtonVisible, setIsButtonVisible] = useState(true);
     const [showToast, setShowToast] = useState(false);
     
     // Gives each player a turn and renames it to identify "rock", "paper" or "scissors"
 
-    const handleGame = async () => {
+    const handleGame = () => {
+
+        //Setting timeouts so turns are shown one at a time
 
         setTimeout(() => {
             playerTurn === 0 && setPlayer("Rock")
@@ -47,23 +50,21 @@ const MatchController = () => {
 
     // Checks the turns , declares a winner and saves the match
 
-    const handleWinner = async () => {
+    const handleWinner = () => {
 
         if (player === "Rock" && computer === "Scissors" || player === "Paper" && computer === "Rock" || player === "Scissors" && computer === "Paper") {
-            setWinner("Player")
+            setWinner("Player") 
         } else if (player === computer) {
             setWinner("Draw")
         } else {
             setWinner("Computer")
         }
-
         setShowToast(true)
     }
 
     // Clears the state values when the button is pressed 
 
     const handleReset = () => {
-        saveMatchData(player, computer, winner)
         setComputer("")
         setPlayer("")
         setWinner("")
@@ -74,19 +75,26 @@ const MatchController = () => {
 
     // Handles the winner when there are state updates for the player or the computer
 
-    useEffect(() => {
+    useEffect( () => {
         if (player !== "" && computer !== "") {
           handleWinner();
         }
     }, [player, computer]);
 
+    //Saves match details once a winner is declared
+
+    useEffect( () => {
+        if (winner === "Player" || winner === "Computer" || winner === "Draw") {
+            saveMatchData(player, computer, winner)
+        }
+    }, [winner]);
     
     return (
         <>
 
             <ion-row class="game-wrapper">
                 <ion-col size="5">
-                    <IonCard className="player">
+                    <IonCard className="player-card">
                         <ion-card-header>
                         <ion-card-title className="text-center">Player</ion-card-title>
                         <ion-card-subtitle>{player}</ion-card-subtitle>
@@ -101,7 +109,7 @@ const MatchController = () => {
                 </ion-col>
                 <h1 className="versus-text">VS</h1>
                 <ion-col size="5">
-                    <IonCard className="player">
+                    <IonCard className="player-card">
                         <ion-card-header>
                         <ion-card-title>Computer</ion-card-title>
                         <ion-card-subtitle>{computer}</ion-card-subtitle>
@@ -117,7 +125,7 @@ const MatchController = () => {
             </ion-row>
         
             <div className="button-wrapper">
-                {player === "" && <IonButton className="main-button" onClick={() => handleGame()}>Play</IonButton> }
+                {player === "" && isButtonVisible && <IonButton className="main-button" onClick={() => handleGame() && setIsButtonVisible(false)}>Play</IonButton> }
 
                 {player !== "" && winner !== ""  && player !== computer ? <IonToast isOpen={showToast} onDidDismiss={() => setShowToast(false)} message={`${winner} wins!`} duration={3000} />  : winner === "Draw" &&  <IonToast isOpen={showToast} onDidDismiss={() => setShowToast(false)} message="Looks like we have a draw!" duration={3000} />}
                 {player && computer !== "" && <IonButton className="main-button" onClick={() => handleReset()}>Play Again</IonButton>}
