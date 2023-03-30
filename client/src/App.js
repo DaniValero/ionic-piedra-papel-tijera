@@ -1,7 +1,7 @@
 import React from 'react';
 import { setupIonicReact } from '@ionic/react';
 import { IonApp } from '@ionic/react';
-import Router from './model/router';
+import Router from './utils/router';
 import '@ionic/react/css/core.css';
 import Navbar from './model/Navbar';
 
