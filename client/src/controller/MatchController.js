@@ -1,5 +1,5 @@
-import { IonButton, IonCard, IonToast } from "@ionic/react"
 import React, {useState, useEffect} from "react"
+import { IonButton, IonCard, IonToast } from "@ionic/react"
 import saveMatchData from "../model/SaveMatch"
 import playerimg from "../assets/Player.jpg"
 import computerimg from "../assets/computer.jpg"
