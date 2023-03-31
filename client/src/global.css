@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --ion-background-color:#f6f6f8;
 }
 
 code {
@@ -12,22 +13,24 @@ code {
     monospace;
 }
 
+
 @media screen and (min-width: 300px) and (max-width: 600px){
  
   .game-wrapper {
     margin: 10vh auto;
     display: flex;
     flex-direction: column;
-    
   }
 
   .player-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     text-align: center;
-    width: 200px;
-    margin: 2px auto;
+    min-width: 250px;
+  }
+
+  .card-img {
+    border-radius: 10px;
+    min-width: 200px;
+
   }
 
 }
@@ -48,6 +51,7 @@ code {
 .card-img {
   height: 30vh;
   width: 25vw;
+  border-radius: 10px;
 }
 
 .player-card {
@@ -57,6 +61,7 @@ code {
   text-align: center;
   width: 30vw;
   margin: 2px auto;
+  background-color: rgb(255, 255, 255);
 }
 
 .button-wrapper {
@@ -73,7 +78,8 @@ code {
 .versus-text {
   font-family: "versus-font";
   font-size: 90px;
-  margin: 2px auto;
+  margin: auto;
+  color: rgb(37, 37, 37);
 }
 
 /* HISTORY VIEW  */

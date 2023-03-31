@@ -5,7 +5,7 @@ import playerimg from "../assets/Player.jpg"
 import computerimg from "../assets/computer.jpg"
 import rock from "../assets/Rock.png"
 import paper from "../assets/Paper.png"
-import scissors from "../assets/Scissors.jpg"
+import scissors from "../assets/Scissors.png"
 import "../global.css"
 
 
@@ -92,8 +92,8 @@ const MatchController = () => {
     return (
         <>
 
-            <ion-row class="game-wrapper">
-                <ion-col size="5">
+            <div class="game-wrapper">
+              
                     <IonCard className="player-card">
                         <ion-card-header>
                         <ion-card-title className="text-center">Player</ion-card-title>
@@ -106,9 +106,9 @@ const MatchController = () => {
                             {player === "Scissors" && <img src={scissors} alt='Player img' className="card-img"></img>}
                         </ion-card-content>
                     </IonCard>
-                </ion-col>
+          
                 <h1 className="versus-text">VS</h1>
-                <ion-col size="5">
+              
                     <IonCard className="player-card">
                         <ion-card-header>
                         <ion-card-title>Computer</ion-card-title>
@@ -121,8 +121,8 @@ const MatchController = () => {
                             {computer === "Scissors" && <img src={scissors} alt='Player img' className="card-img"></img>}
                         </ion-card-content>
                     </IonCard>
-                </ion-col>
-            </ion-row>
+         
+            </div>
         
             <div className="button-wrapper">
                 {player === "" && isButtonVisible && <IonButton className="main-button" onClick={() => handleGame() && setIsButtonVisible(false)}>Play</IonButton> }
